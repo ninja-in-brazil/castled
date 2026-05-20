@@ -1,0 +1,5 @@
+*.gem
+.bundle/
+config.yml
+demo_src/
+demo_backups/
