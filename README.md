@@ -1,6 +1,6 @@
 # Castled
 
-A simple Ruby gem for backing up and restoring files via the `simple-backup` CLI.
+Castled is a small Ruby gem for simple file backups and restores from the terminal. It is designed with Omarchy in mind, making it easy to back up and restore system and desktop configuration files using plain text configuration.
 
 ## Installation
 
@@ -44,6 +44,24 @@ simple-backup backup
 ```
 
 Backups are stored as `backup_name_YYYYMMDD_HHMMSS` (e.g. `my_backup_20260519_112300`).
+
+### Schedule with cron
+
+To run backups automatically, add a cron job that changes into the directory with your `config.yml` and runs the backup command.
+
+Open your crontab:
+
+```bash
+crontab -e
+```
+
+Example: run a backup every day at 9:00 AM:
+
+```cron
+0 9 * * * cd /path/to/backup-config && /usr/bin/env simple-backup backup
+```
+
+Use full paths in cron jobs when possible, since cron runs with a smaller environment than your interactive terminal.
 
 ### Restore
 
