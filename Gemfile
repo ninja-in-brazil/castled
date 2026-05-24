@@ -7,3 +7,5 @@ gemspec
 group :development do
   gem "rake"
 end
+
+gem "minitest", "~> 6.0", group: :development

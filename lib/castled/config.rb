@@ -8,10 +8,14 @@ module Castled
     CONFIG_FILENAME = "config.yml"
 
     DEFAULT_TEMPLATE = <<~YAML
-      backup_name: my_backup
+      backup_name: omarchy
       backup_paths:
-        - path/to/file_or_folder
-      destination: path/to/backups
+        - ~/.bash_logout
+        - ~/.bash_profile
+        - ~/.bashrc
+        - ~/.gemrc
+        - ~/.XCompose
+      destination: /run/media/leonid/250GB/backups
     YAML
 
     class Error < StandardError; end

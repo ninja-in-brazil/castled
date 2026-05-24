@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Castled — Simple backups for Omarchy</title>
+  <meta name="description" content="A tiny, opinionated backup tool for Omarchy users. Initialize once, back up your dotfiles, restore when you need them.">
+  <style>
+    :root {
+      --bg: #0f1114;
+      --surface: #1a1d23;
+      --border: #2a3038;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --accent: #7eb8da;
+      --accent-dim: #5a8fad;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .wrap {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .tagline {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .pitch {
+      margin-bottom: 2.5rem;
+      color: var(--muted);
+    }
+    .pitch strong { color: var(--text); font-weight: 500; }
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-dim);
+      margin: 2rem 0 0.75rem;
+    }
+    pre, code {
+      font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.8125rem;
+    }
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 0.5rem;
+    }
+    .cmd { color: var(--accent); }
+    .comment { color: var(--muted); }
+    ul.features {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    ul.features li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--muted);
+    }
+    ul.features li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-dim);
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Castled</h1>
+    <p class="tagline">Simple backups for Omarchy. Opinionated defaults, zero ceremony.</p>
+
+    <p class="pitch">
+      Omarchy is <strong>beautiful, modern &amp; opinionated Linux</strong> — omakase computing,
+      chef's choice. Castled brings the same spirit to your personal dotfiles: one command to
+      initialize, one to back up, one to restore. No backup framework to learn. Substitutions
+      welcome.
+    </p>
+
+    <ul class="features">
+      <li>Curated <code>config.yml</code> from <code>simple-backup init</code></li>
+      <li>Timestamped copies to any destination (USB, NAS, local disk)</li>
+      <li>Interactive restore with dry-run and diff preview</li>
+    </ul>
+
+    <h2>Install</h2>
+    <pre><code><span class="cmd">gem build castled.gemspec</span>
+<span class="cmd">gem install castled-*.gem</span></code></pre>
+
+    <h2>Initialize</h2>
+    <pre><code><span class="cmd">simple-backup init</span>
+<span class="comment"># creates config.yml with Omarchy-friendly defaults</span></code></pre>
+
+    <h2>Example config</h2>
+    <pre><code>backup_name: omarchy
+backup_paths:
+  - ~/.bash_logout
+  - ~/.bash_profile
+  - ~/.bashrc
+  - ~/.gemrc
+  - ~/.XCompose
+destination: /run/media/leonid/250GB/backups</code></pre>
+
+    <h2>Backup &amp; restore</h2>
+    <pre><code><span class="cmd">simple-backup backup</span>
+<span class="comment"># → omarchy_YYYYMMDD_HHMMSS/</span>
+
+<span class="cmd">simple-backup restore</span>
+<span class="cmd">simple-backup restore --dry-run --diff</span></code></pre>
+
+    <h2>Schedule (optional)</h2>
+    <pre><code><span class="comment"># crontab — daily at 9:00</span>
+0 9 * * * cd /path/to/config &amp;&amp; simple-backup backup</code></pre>
+
+    <footer>
+      <a href="https://github.com/example/castled">GitHub</a>
+      ·
+      <a href="https://omarchy.org">Omarchy</a>
+      ·
+      MIT License
+    </footer>
+  </div>
+</body>
+</html>
